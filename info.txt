@@ -1,0 +1,28 @@
+# 2013.5.3
+# Twitter Botについてまとめておく
+
+# 環境
+
+- PHP 5.2 over
+- cron
+- teitteroauth
+	Github https://github.com/abraham/twitteroauth
+
+# 必要な情報
+
+- Consumer key	
+- Consumer secret	
+- Access token	
+- Access token secret	
+
+
+# Twitter Developer ページにてアプリを作る
+
+- settingよりアプリのレベルをRead and Writeに変更
+- 終わったらcreate access tokenボタンを押す
+- Access token , Accsess token secretが取得できているか。
+- Access tokenのレベルが read, write になっているか確認。
+
+# API Document
+- https://dev.twitter.com/docs/api/1.1
+
