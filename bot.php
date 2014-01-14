@@ -4,6 +4,8 @@ require_once('twitteroauth/twitteroauth.php');
 require_once('conf.php');
 
 $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+$conn->host = "https://api.twitter.com/1.1/";
+$conn->ssl_verifypeer = TRUE;
 
 // API test
 // $result = $conn->get('account/verify_credentials');
@@ -13,12 +15,39 @@ $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOK
 
 
 // status update
-$date = date("Y-m-d H:i:s");
-$param = array(
-	"status" => "{$date} Twitter Bot を cron で走らせるテスト中なり..."
+$date = date("Y/m/d H:i:s");
+$w = date("w", $date);
+$strings = array(
+        2 => "空き缶・ペットボトル・空きびん・使用済み乾電池・粗大ごみ・小物金属",
+        3 => "プラスチック製容器包装",
+        4 => "普通ゴミ",
+        6 => "ミックスペーパー",
+        7 => "普通ゴミ"
 );
-$result = $conn->post('statuses/update', $param);
+$user = "";
 
 echo "<pre>";
-print_r($result);
+print_r($date);
 echo "</pre>";
+
+echo "<pre>";
+print_r($strings[$w]);
+echo "</pre>";
+
+if (isset($strings[$w])) {
+        $param = array(
+                "status" => "{$user} {$date} {$strings[$w]}"
+        );
+        echo "<pre>";
+        print_r($param);
+        echo "</pre>";
+
+        $result = $conn->post('statuses/update', $param);
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+}
+
+
+
+
